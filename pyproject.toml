@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "philiprehberger-flatten-json"
-version = "0.1.0"
+version = "0.1.1"
 description = "Flatten nested JSON/dicts into dot-notation keys and unflatten back"
 readme = "README.md"
 license = "MIT"
@@ -24,9 +24,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/philiprehberger/py-flatten-json"
+Homepage = "https://github.com/philiprehberger/py-flatten-json#readme"
 Repository = "https://github.com/philiprehberger/py-flatten-json"
 Issues = "https://github.com/philiprehberger/py-flatten-json/issues"
+Changelog = "https://github.com/philiprehberger/py-flatten-json/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/philiprehberger_flatten_json"]
