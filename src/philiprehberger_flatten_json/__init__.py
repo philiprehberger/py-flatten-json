@@ -16,6 +16,7 @@ def flatten(
     *,
     separator: str = ".",
     max_depth: int = 0,
+    prefix: str = "",
 ) -> dict[str, Any]:
     """Flatten a nested dict/list into a flat dict with dot-notation keys.
 
@@ -23,12 +24,13 @@ def flatten(
         data: Nested dict or list.
         separator: Key separator. Defaults to ``"."``.
         max_depth: Maximum nesting depth to flatten. 0 means unlimited.
+        prefix: String to prepend to all keys.
 
     Returns:
         Flat dict with composite keys.
     """
     result: dict[str, Any] = {}
-    _flatten_recursive(data, "", separator, max_depth, 0, result)
+    _flatten_recursive(data, prefix, separator, max_depth, 0, result)
     return result
 
 
@@ -64,12 +66,14 @@ def _flatten_recursive(
         result[prefix] = data
 
 
-def unflatten(data: dict[str, Any], *, separator: str = ".") -> dict | list:
+def unflatten(data: dict[str, Any], *, separator: str = ".", list_as_dict: bool = False) -> dict | list:
     """Unflatten a flat dict with dot-notation keys back to nested structure.
 
     Args:
         data: Flat dict with composite keys.
         separator: Key separator used during flattening.
+        list_as_dict: When True, numeric keys stay as dict keys instead of
+            converting to lists.
 
     Returns:
         Nested dict or list.
@@ -83,6 +87,8 @@ def unflatten(data: dict[str, Any], *, separator: str = ".") -> dict | list:
         keys = compound_key.split(separator)
         _set_nested(result, keys, value)
 
+    if list_as_dict:
+        return result
     return _convert_numeric_dicts(result)
 
 
