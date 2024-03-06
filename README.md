@@ -3,6 +3,7 @@
 [![Tests](https://github.com/philiprehberger/py-flatten-json/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/py-flatten-json/actions/workflows/publish.yml)
 [![PyPI version](https://img.shields.io/pypi/v/philiprehberger-flatten-json.svg)](https://pypi.org/project/philiprehberger-flatten-json/)
 [![License](https://img.shields.io/github/license/philiprehberger/py-flatten-json)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
 
 Flatten nested JSON/dicts into dot-notation keys and unflatten back.
 
