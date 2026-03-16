@@ -62,6 +62,14 @@ unflatten({"a.0": 1, "a.1": 2}, list_as_dict=True)
 - `separator` — Key separator used during flattening
 - `list_as_dict` — When `True`, numeric keys stay as dict keys instead of converting to lists
 
+
+## Development
+
+```bash
+pip install -e .
+python -m pytest tests/ -v
+```
+
 ## License
 
 MIT

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- Add Development section to README
+
 ## 0.2.0
 
 - Add `prefix` parameter to `flatten()` for prepending a root key
