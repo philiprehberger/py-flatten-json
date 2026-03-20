@@ -42,7 +42,7 @@ unflatten({"a.0": 1, "a.1": 2}, list_as_dict=True)
 # {"a": {"0": 1, "1": 2}}
 ```
 
-## API Reference
+## API
 
 | Function | Description |
 |---|---|
