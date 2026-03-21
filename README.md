@@ -42,7 +42,21 @@ unflatten({"a.0": 1, "a.1": 2}, list_as_dict=True)
 # {"a": {"0": 1, "1": 2}}
 ```
 
-## API Reference
+### Roundtrip
+
+```python
+from philiprehberger_flatten_json import flatten, unflatten
+
+data = {"users": [{"name": "Alice", "age": 30}], "meta": {"version": 2}}
+
+flat = flatten(data)
+# {"users.0.name": "Alice", "users.0.age": 30, "meta.version": 2}
+
+restored = unflatten(flat)
+# {"users": [{"name": "Alice", "age": 30}], "meta": {"version": 2}}
+```
+
+## API
 
 | Function | Description |
 |---|---|

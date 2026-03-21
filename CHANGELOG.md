@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.6
+
+- Add flatten/unflatten roundtrip example to README
+
 ## 0.2.3
 
 - Add Development section to README
