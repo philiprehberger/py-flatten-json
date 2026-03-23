@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.7 (2026-03-22)
+
+- Add pytest and mypy configuration to pyproject.toml
+
 ## 0.2.6
 
 - Add flatten/unflatten roundtrip example to README
