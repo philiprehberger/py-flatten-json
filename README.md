@@ -2,8 +2,7 @@
 
 [![Tests](https://github.com/philiprehberger/py-flatten-json/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/py-flatten-json/actions/workflows/publish.yml)
 [![PyPI version](https://img.shields.io/pypi/v/philiprehberger-flatten-json.svg)](https://pypi.org/project/philiprehberger-flatten-json/)
-[![License](https://img.shields.io/github/license/philiprehberger/py-flatten-json)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
+[![Last updated](https://img.shields.io/github/last-commit/philiprehberger/py-flatten-json)](https://github.com/philiprehberger/py-flatten-json/commits/main)
 
 Flatten nested JSON/dicts into dot-notation keys and unflatten back.
 
@@ -77,7 +76,6 @@ restored = unflatten(flat)
 - `separator` — Key separator used during flattening
 - `list_as_dict` — When `True`, numeric keys stay as dict keys instead of converting to lists
 
-
 ## Development
 
 ```bash
@@ -85,6 +83,24 @@ pip install -e .
 python -m pytest tests/ -v
 ```
 
+## Support
+
+If you find this project useful:
+
+⭐ [Star the repo](https://github.com/philiprehberger/py-flatten-json)
+
+🐛 [Report issues](https://github.com/philiprehberger/py-flatten-json/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+💡 [Suggest features](https://github.com/philiprehberger/py-flatten-json/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
+
+❤️ [Sponsor development](https://github.com/sponsors/philiprehberger)
+
+🌐 [All Open Source Projects](https://philiprehberger.com/open-source-packages)
+
+💻 [GitHub Profile](https://github.com/philiprehberger)
+
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/philiprehberger)
+
 ## License
 
-MIT
+[MIT](LICENSE)
