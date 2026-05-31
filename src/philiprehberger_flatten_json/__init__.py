@@ -7,6 +7,8 @@ from typing import Any
 
 __all__ = [
     "flatten",
+    "get_by_path",
+    "set_by_path",
     "unflatten",
 ]
 
@@ -123,3 +125,79 @@ def _is_int(s: str) -> bool:
     except ValueError:
         return False
     return True
+
+
+def get_by_path(
+    data: dict | list,
+    path: str,
+    *,
+    separator: str = ".",
+    default: Any = None,
+) -> Any:
+    """Look up a value by dot-notation path.
+
+    Numeric path segments index into lists; non-numeric segments key
+    into dicts. Returns *default* when any segment is missing or
+    out-of-range.
+
+    Examples:
+        >>> get_by_path({"users": [{"name": "ada"}]}, "users.0.name")
+        'ada'
+        >>> get_by_path({"a": 1}, "a.b", default="missing")
+        'missing'
+    """
+    segments = path.split(separator)
+    node: Any = data
+    for segment in segments:
+        if isinstance(node, list):
+            try:
+                node = node[int(segment)]
+            except (IndexError, ValueError):
+                return default
+        elif isinstance(node, dict):
+            try:
+                node = node[segment]
+            except KeyError:
+                return default
+        else:
+            return default
+    return node
+
+
+def set_by_path(
+    data: dict | list,
+    path: str,
+    value: Any,
+    *,
+    separator: str = ".",
+) -> None:
+    """Set a value at *path*, creating intermediate dicts as needed.
+
+    Intermediate dicts are created automatically. Lists must already
+    exist (numeric segments only index into pre-existing lists).
+
+    Raises:
+        IndexError: If a numeric segment is out of range for an existing list.
+        TypeError: If a non-numeric segment is used on a list.
+    """
+    segments = path.split(separator)
+    node: Any = data
+    for segment in segments[:-1]:
+        if isinstance(node, list):
+            if not segment.lstrip("-").isdigit():
+                raise TypeError(f"Cannot use non-numeric segment {segment!r} on list")
+            node = node[int(segment)]
+        elif isinstance(node, dict):
+            if segment not in node:
+                node[segment] = {}
+            node = node[segment]
+        else:
+            raise TypeError(f"Cannot traverse into {type(node).__name__} at segment {segment!r}")
+
+    leaf = segments[-1]
+    if isinstance(node, list):
+        if not leaf.lstrip("-").isdigit():
+            raise TypeError(f"Cannot use non-numeric segment {leaf!r} on list")
+        node[int(leaf)] = value
+    else:
+        node[leaf] = value

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from philiprehberger_flatten_json import flatten, unflatten
+from philiprehberger_flatten_json import flatten, get_by_path, set_by_path, unflatten
 
 
 # --- Flatten basics ---
@@ -148,3 +148,42 @@ def test_single_key():
 
 def test_unflatten_empty():
     assert unflatten({}) == {}
+
+
+# --- get_by_path ---
+
+def test_get_by_path_nested_dict():
+    assert get_by_path({"a": {"b": 1}}, "a.b") == 1
+
+def test_get_by_path_list_index():
+    data = {"users": [{"name": "ada"}, {"name": "bob"}]}
+    assert get_by_path(data, "users.1.name") == "bob"
+
+def test_get_by_path_missing_returns_default():
+    assert get_by_path({"a": 1}, "x.y", default="d") == "d"
+
+def test_get_by_path_list_out_of_range():
+    assert get_by_path([1, 2, 3], "5", default=None) is None
+
+
+# --- set_by_path ---
+
+def test_set_by_path_creates_intermediate_dicts():
+    data: dict = {}
+    set_by_path(data, "a.b.c", 42)
+    assert data == {"a": {"b": {"c": 42}}}
+
+def test_set_by_path_overwrites_existing():
+    data = {"a": {"b": 1}}
+    set_by_path(data, "a.b", 99)
+    assert data == {"a": {"b": 99}}
+
+def test_set_by_path_into_list():
+    data = {"users": [{}, {}]}
+    set_by_path(data, "users.0.name", "ada")
+    assert data["users"][0]["name"] == "ada"
+
+def test_set_by_path_custom_separator():
+    data: dict = {}
+    set_by_path(data, "a/b", 1, separator="/")
+    assert data == {"a": {"b": 1}}

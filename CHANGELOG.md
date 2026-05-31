@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 (2026-05-30)
+
+- Add `get_by_path()` for dot-path lookup into nested dicts and lists
+- Add `set_by_path()` for dot-path mutation with auto-created intermediate dicts
+
 ## 0.2.8 (2026-03-31)
 
 - Standardize README to 3-badge format with emoji Support section

@@ -56,12 +56,33 @@ restored = unflatten(flat)
 # {"users": [{"name": "Alice", "age": 30}], "meta": {"version": 2}}
 ```
 
+### Path access
+
+```python
+from philiprehberger_flatten_json import get_by_path, set_by_path
+
+data = {"users": [{"name": "ada"}, {"name": "bob"}]}
+
+get_by_path(data, "users.1.name")
+# "bob"
+
+get_by_path(data, "users.5.name", default="unknown")
+# "unknown"
+
+config: dict = {}
+set_by_path(config, "db.host", "localhost")
+set_by_path(config, "db.port", 5432)
+# config == {"db": {"host": "localhost", "port": 5432}}
+```
+
 ## API
 
 | Function | Description |
 |---|---|
 | `flatten(data, *, separator=".", max_depth=0, prefix="")` | Flatten nested dict/list into dot-notation keys |
 | `unflatten(data, *, separator=".", list_as_dict=False)` | Restore nested structure from flat dict |
+| `get_by_path(data, path, *, separator=".", default=None)` | Look up a value by dot-notation path |
+| `set_by_path(data, path, value, *, separator=".")` | Set a value at *path*, creating intermediate dicts as needed |
 
 ### Parameters
 
